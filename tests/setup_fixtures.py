@@ -1,13 +1,22 @@
-import pytest
-from brownie import network, accounts
-from brownie._config import CONFIG
 import os
-import yaml
 
+import pytest
+import yaml
+from brownie import network
+from brownie._config import CONFIG
+import brownie.project as project
+
+@pytest.fixture(scope='session')
+def brownie_project():
+    project.load('.')
+    return project.EvmhacksreplayProject
 
 @pytest.fixture()
-def setup_eth_fork(request):
-    fork_blocknumber = request.node.get_closest_marker('brownie_network_name')
+def eth_fork_network(request):
+    # brownie automatically starts ganache for some reason
+    network.disconnect(kill_rpc=True)
+
+    fork_blocknumber = request.node.get_closest_marker('fork_blocknumber').args[0]
 
     file_dir = os.path.dirname(__file__)
 
@@ -37,10 +46,6 @@ def setup_eth_fork(request):
 
     network.connect(brownie_id)
 
-    yield
+    yield network
 
     network.disconnect(kill_rpc=True)
-
-@pytest.mark.fork_blocknumber(4501735)
-def test_hack(setup_fork):
-    raise NotImplementedError

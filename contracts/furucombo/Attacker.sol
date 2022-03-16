@@ -2,6 +2,8 @@ pragma solidity >=0.8.0;
 import "../../interfaces/IERC20.sol";
 import "./Proxy.sol";
 
+// from: https://github.com/MrToph/replaying-ethereum-hacks
+
 contract Attacker {
     IProxy public constant furucombo =
         IProxy(0x17e8Ca1b4798B97602895f63206afCd1Fc90Ca5f);

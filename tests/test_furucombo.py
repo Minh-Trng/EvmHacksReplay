@@ -20,6 +20,7 @@ def test_victim_has_funds_and_approved_furucombo_proxy(eth_fork_network, brownie
 @pytest.mark.fork_blocknumber(11940499)
 def test_aave_proxy_is_whitelisted_in_registry(eth_fork_network, brownie_project):
     # private field, needs to be read from storage
+    # keccak256 hash of "furucombo.handler.registry" -> also hardcoded in the contract
     HANDLER_REGISTRY_SLOT = '0x6874162fd62902201ea0f4bf541086067b3b88bd802fac9e150fd2d1db584e19'
     registry_addr_hexbytes = eth_fork_network.web3.eth.get_storage_at(FURUCOMBO_PROXY_ADDR, HANDLER_REGISTRY_SLOT)
     registry_addr = eth_fork_network.web3.toHex(registry_addr_hexbytes)

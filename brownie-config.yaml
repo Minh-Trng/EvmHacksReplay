@@ -1,0 +1,8 @@
+dependencies:
+  - Uniswap/v3-core@1.0.0
+  - Uniswap/v3-periphery@1.2.0
+compiler:
+    solc:
+        remappings:
+          - "@uniswap/v3-core=Uniswap/v3-core@1.0.0"
+          - "@uniswap/v3-periphery=Uniswap/v3-periphery@1.2.0"

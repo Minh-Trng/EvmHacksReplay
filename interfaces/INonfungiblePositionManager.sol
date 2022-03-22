@@ -1,4 +1,4 @@
-// @uniswap/v3-periphery uses open-zeppelin < 0.8 which means we cannot compile
+// @uniswap-v3/v3-periphery uses open-zeppelin < 0.8 which means we cannot compile
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.8.0;
 pragma abicoder v2;

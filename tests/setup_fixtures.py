@@ -8,6 +8,8 @@ import brownie.project as project
 
 @pytest.fixture(scope='session')
 def brownie_project():
+    if hasattr(project, 'EvmhacksreplayProject'):
+        return project.EvmhacksreplayProject
     project.load('.')
     return project.EvmhacksreplayProject
 

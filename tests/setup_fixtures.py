@@ -28,19 +28,32 @@ def eth_fork_network(request):
     rpc_url = config["ETHEREUM_RPC_URL"]
     brownie_id = "fork-at-block"
 
+    # network_config = {
+    #     "name": "Ganache-CLI (Mainnet Fork)",
+    #     "id": brownie_id,
+    #     "cmd": "ganache-cli",
+    #     "host": "http://127.0.0.1",
+    #     "timeout": 120,
+    #     "cmd_settings": {
+    #         "port": 8545,
+    #         "gas_limit": 12000000,
+    #         "accounts": 10,
+    #         "evm_version": "istanbul",
+    #         "mnemonic": "brownie",
+    #         "fork": f"{rpc_url}@{fork_blocknumber}"
+    #     }
+    # }
+
     network_config = {
-        "name": "Ganache-CLI (Mainnet Fork)",
+        "name": "Hardhat (Mainnet Fork)",
         "id": brownie_id,
-        "cmd": "ganache-cli",
-        "host": "http://127.0.0.1",
+        "cmd": "npx hardhat node",
+        "host": "http://localhost",
         "timeout": 120,
         "cmd_settings": {
             "port": 8545,
-            "gas_limit": 12000000,
-            "accounts": 10,
-            "evm_version": "istanbul",
-            "mnemonic": "brownie",
-            "fork": f"{rpc_url}@{fork_blocknumber}"
+            "fork": rpc_url,
+            "fork_block": fork_blocknumber
         }
     }
 

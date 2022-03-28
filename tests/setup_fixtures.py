@@ -15,7 +15,7 @@ def brownie_project():
 
 @pytest.fixture()
 def eth_fork_network(request):
-    # brownie automatically starts ganache for some reason
+    # brownie automatically starts ganache with its pytest hooks
     network.disconnect(kill_rpc=True)
 
     fork_blocknumber = request.node.get_closest_marker('fork_blocknumber').args[0]
